@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BÁO CÁO CÔNG VIỆC PHÒNG ĐÀO TẠO THÁNG 10</title>
+    <!-- Tải Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tải Chart.js cho biểu đồ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Cấu hình Tailwind cho màu xanh lá cây nhẹ nhàng -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-light': '#D1FAE5', // Xanh mint rất nhẹ
+                        'primary-green': '#10B981', // Xanh ngọc bích
+                        'secondary-green': '#34D399', // Xanh lá cây nhạt hơn
+                        'dark-text': '#065F46', // Xanh đậm cho chữ
+                        'bg-light': '#F0FFF4', // Nền siêu nhẹ
+                        'high-usage': '#F87171', // Màu đỏ cảnh báo (cho CSVC)
+                        'warning-yellow': '#F59E0B' // Vàng cảnh báo
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0FFF4;
+        }
+        .card-shadow {
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1), 0 2px 4px -1px rgba(16, 185, 129, 0.06);
+        }
+        /* Tăng chiều cao tối đa cho canvas để biểu đồ chi tiết hơn */
+        .chart-container-tall {
+            position: relative;
+            height: 450px; 
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden card-shadow p-6 md:p-10">
+        
+        <!-- Header -->
+        <header class="text-center mb-10 border-b-4 border-primary-green pb-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-primary-green tracking-tight">
+                BÁO CÁO CÔNG VIỆC THÁNG 10/2025
+            </h1>
+            <p class="text-xl text-secondary-green mt-2 font-medium">Phòng Đào tạo - Tổng quan và Phân tích Dữ liệu</p>
+        </header>
+
+        <!-- 1. Tổ chức Đào tạo & Tiến độ -->
+        <section class="mb-10 p-6 bg-primary-light rounded-lg card-shadow">
+            <h2 class="text-3xl font-bold text-dark-text mb-4 border-l-4 border-secondary-green pl-3">1. Tổ chức Đào tạo & Tiến độ</h2>
+            <p class="mb-6 text-gray-700 font-medium">Tháng 10 tập trung vào việc đảm bảo tiến độ học kỳ và giải quyết tình trạng nợ môn của các khóa, đặc biệt là các khóa cuối chuẩn bị tốt nghiệp.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- K21+K22 -->
+                <div class="p-4 bg-white rounded-lg border-t-4 border-primary-green">
+                    <h3 class="font-bold text-xl text-primary-green mb-2">K21+K22</h3>
+                    <p class="text-sm text-gray-700">Tiếp tục triển khai **push trả nợ môn** đối với các môn có trong học kỳ 1 (NH 25-26) bằng cách ghép sinh viên vào các lớp phù hợp.</p>
+                    <span class="inline-block mt-2 text-xs font-semibold text-white bg-secondary-green px-2 py-1 rounded-full">Đang xử lý nợ môn</span>
+                </div>
+                <!-- K22A, K23, K23A, K23 Buổi tối -->
+                <div class="p-4 bg-white rounded-lg border-t-4 border-warning-yellow">
+                    <h3 class="font-bold text-xl text-primary-green mb-2">K22A, K23, K23A</h3>
+                    <ul class="list-disc list-inside text-sm text-gray-700 ml-2 space-y-1">
+                        <li>Tiến độ đào tạo đảm bảo ở 4 ngành (PDTA, TH, TT, CSSD).</li>
+                        <li>Ngành UDPM, TKDH có tiến độ **chậm hơn** do số môn học còn nhiều.</li>
+                        <li>Yêu cầu: Xây dựng tiền độ trả nợ môn chi tiết cho từng ngành.</li>
+                    </ul>
+                    <span class="inline-block mt-2 text-xs font-semibold text-white bg-warning-yellow px-2 py-1 rounded-full">Tiến độ cần theo dõi</span>
+                </div>
+                <!-- K24 -->
+                <div class="p-4 bg-white rounded-lg border-t-4 border-primary-green">
+                    <h3 class="font-bold text-xl text-primary-green mb-2">K24</h3>
+                    <p class="text-sm text-gray-700">Hoàn thành triển khai kỳ **Thực tập chuyên đề** cho tất cả các ngành. Lịch học được linh hoạt để phù hợp với thời gian thực tập.</p>
+                    <span class="inline-block mt-2 text-xs font-semibold text-white bg-primary-green px-2 py-1 rounded-full">Đã hoàn thành</span>
+                </div>
+            </div>
+
+            <!-- KẾ HOẠCH THÁNG 11 -->
+            <div class="mt-8 p-4 bg-white rounded-lg border-l-4 border-secondary-green">
+                <h3 class="font-bold text-xl text-secondary-green mb-3">Kế hoạch Tháng 11</h3>
+                <ul class="list-disc list-inside ml-4 space-y-1 text-sm text-gray-700">
+                    <li>Tham gia kiểm định theo kế hoạch của nhà trường.</li>
+                    <li>Tổ chức môn học Pháp Luật và Giáo dục thể chất.</li>
+                    <li>Gửi sinh viên đi học Quốc Phòng An Ninh.</li>
+                    <li>Phối hợp Khoa ngành tham gia dự giờ chuyên môn.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 2. Hệ Phổ thông Cao đẳng (PTCĐ) -->
+        <section class="mb-10 p-6 bg-primary-light rounded-lg card-shadow">
+            <h2 class="text-3xl font-bold text-dark-text mb-4 border-l-4 border-secondary-green pl-3">2. Hệ Phổ thông Cao đẳng (PTCĐ)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mb-6">
+                <div class="p-4 bg-white rounded-lg border border-secondary-green/50">
+                    <p class="text-4xl font-extrabold text-primary-green">688</p>
+                    <p class="text-sm text-gray-600 font-semibold mt-1">Tổng quy mô HS Hệ 9+7</p>
+                </div>
+                <div class="p-4 bg-white rounded-lg border border-secondary-green/50">
+                    <p class="text-4xl font-extrabold text-primary-green">50/79</p>
+                    <p class="text-sm text-gray-600 font-semibold mt-1">Tiến độ Phát bằng Khối 12</p>
+                </div>
+                <div class="p-4 bg-white rounded-lg border border-secondary-green/50">
+                    <p class="text-4xl font-extrabold text-primary-green">Đã Hoàn thành</p>
+                    <p class="text-sm text-gray-600 font-semibold mt-1">Kiểm tra Giữa kỳ I (17 Môn)</p>
+                </div>
+            </div>
+            
+            <div class="mt-6 text-gray-700">
+                <p class="font-bold text-dark-text text-lg border-b pb-1">Hoạt động chào mừng Ngày Nhà giáo Việt Nam 20/11:</p>
+                <div class="p-3 bg-white rounded-lg mt-2 border border-primary-green/50">
+                    <p class="text-sm font-medium text-primary-green mb-2">Phối hợp với P.CTSV và P.NS-VH lên kế hoạch chi tiết cho hoạt động:</p>
+                    <ul class="list-disc list-inside ml-4 space-y-1 text-sm text-gray-700">
+                        <li>**Phát động thi đua:** Chủ đề **“Nâng cao tri thức – Rèn luyện tác phong: Món quà tri ân Thầy cô”** bắt đầu từ 11/11 đến 20/11.</li>
+                        <li>**Cơ cấu giải thưởng:** 6 giải thưởng (3 cá nhân, 3 tập thể) dựa trên tiêu chí chấm điểm gửi đến GVCN.</li>
+                        <li>**Nội dung thi đua:**
+                            <ul class="list-disc list-inside ml-4">
+                                <li>Chăm chỉ học tập, đạt điểm tốt, giữ gìn nề nếp và tác phong đúng mực.</li>
+                                <li>Mỗi lớp có **1 tiết mục văn nghệ** và **1 sản phẩm báo tường**.</li>
+                            </ul>
+                        </li>
+                        <li>**Kế hoạch Sơ khảo & Chung kết (P.CTSV chủ trì):**
+                            <ul class="list-disc list-inside ml-4">
+                                <li>**Sơ khảo (Dự kiến 17/11):** Chọn ra 4 đội văn nghệ vào vòng chung kết; chấm sản phẩm báo tường trưng bày kèm thuyết minh.</li>
+                                <li>**Chung kết (20/11):** Tổ chức buổi chung kết văn nghệ và trưng bày báo tường đạt điểm cao.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <p class="font-bold text-dark-text text-lg border-b pb-1 mt-4">Các tiến độ khác:</p>
+                <ul class="list-disc list-inside ml-4 space-y-1 text-sm mt-2">
+                    <li>Hoàn thành tổng kết chương trình VMSG học kỳ 1 cho khối 10.</li>
+                    <li>Hoàn thành **kiểm tra giữa kỳ I** (17 môn văn hoá) cho cả 3 khối lớp.</li>
+                    <li><span class="font-bold text-primary-green">Tiến độ Phát bằng:</span> Đã phát bằng cho **50/79** học sinh Khối 12, còn lại đang hoàn thiện hồ sơ.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 3. Hoạt động Khoa/Ngành (Tách rõ T10 & T11) -->
+        <section class="mb-10 p-6 bg-primary-light rounded-lg card-shadow">
+            <h2 class="text-3xl font-bold text-dark-text mb-4 border-l-4 border-secondary-green pl-3">3. Hoạt động Khoa/Ngành</h2>
+            
+            <!-- Hoạt động tháng 10 -->
+            <div class="mb-6 p-4 bg-white rounded-lg border-b-4 border-primary-green">
+                <h3 class="font-bold text-xl text-primary-green mb-3">Hoạt động trong Tháng 10</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="border-l-4 border-green-500 pl-3"><p class="font-semibold">CN-TK:</p><p class="text-sm text-gray-700">Hội thảo công nghệ Việt Mỹ 2025 (dự kiến), Thiện nguyện tại Điện Biên.</p></div>
+                    <div class="border-l-4 border-green-500 pl-3"><p class="font-semibold">Ngôn ngữ:</p><p class="text-sm text-gray-700">Tiếng Nhật (Tham quan Lăng Bác, Phát CC JLPT), Tiếng Hàn (Sinh hoạt GV).</p></div>
+                    <div class="border-l-4 border-green-500 pl-3"><p class="font-semibold">PDTA:</p><p class="text-sm text-gray-700">Phối hợp tổ chức sự kiện Halloween 31/10, Sinh hoạt chuyên môn đầu kỳ.</p></div>
+                    <div class="border-l-4 border-green-500 pl-3"><p class="font-semibold">Kinh Doanh:</p><p class="text-sm text-gray-700">Triển khai các môn kỳ mới, họp đầu kỳ GV và K2501, tạo nhóm PH/SV K25.</p></div>
+                </div>
+            </div>
+
+            <!-- Định hướng tháng 11 -->
+            <div class="p-4 bg-white rounded-lg border-b-4 border-secondary-green">
+                <h3 class="font-bold text-xl text-secondary-green mb-3">Định hướng Tháng 11</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="border-l-4 border-secondary-green pl-3"><p class="font-semibold">CN-TK:</p><p class="text-sm text-gray-700">Họp PH 9+, minh chứng KĐ, sự kiện 20/11.</p></div>
+                    <div class="border-l-4 border-secondary-green pl-3"><p class="font-semibold">Ngôn ngữ:</p><p class="text-sm text-gray-700">Hùng biện Tiếng Nhật, Thi thử TOPIK, OD K25 "Career Talk".</p></div>
+                    <div class="border-l-4 border-secondary-green pl-3"><p class="font-semibold">PDTA:</p><p class="text-sm text-gray-700">Rung chuông vàng K24/K25, tìm đơn vị thực tập cho SV.</p></div>
+                    <div class="border-l-4 border-secondary-green pl-3"><p class="font-semibold">Kinh Doanh:</p><p class="text-sm text-gray-700">Tiếp tục triển khai các môn học kỳ mới.</p></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 4. Báo cáo Học lại -->
+        <section class="mb-10 p-6 bg-white rounded-lg card-shadow">
+            <h2 class="text-3xl font-bold text-dark-text mb-6 border-l-4 border-secondary-green pl-3">4. Báo cáo Tình hình Học lại/Trả nợ môn</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <!-- Cột trái: Biểu đồ cột Tương quan -->
+                <div>
+                    <h3 class="text-xl font-semibold text-primary-green mb-3">Tương quan Sinh viên Nợ môn và Sinh viên đã Học lại (Theo số SV)</h3>
+                    <canvas id="debtChart"></canvas>
+                    <p class="text-sm text-gray-500 mt-2 italic">Biểu đồ so sánh tổng số sinh viên cần học lại và số lượng sinh viên đã hoàn thành giữa các khóa.</p>
+                </div>
+
+                <!-- Cột phải: CHỨA 2 BIỂU ĐỒ TRÒN -->
+                <div class="flex flex-col gap-8">
+                    <!-- Biểu đồ 1 (Hiện có): Hiệu suất trả nợ môn K22 -->
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg border border-primary-light">
+                        <h3 class="text-xl font-semibold text-primary-green mb-3">Hiệu suất trả nợ môn (K22+K22A)</h3>
+                        <div class="w-full max-w-xs">
+                            <canvas id="k22ApieChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2 italic">Khóa K22+K22A đạt tỷ lệ hoàn thành trả nợ môn cao nhất (77.5%).</p>
+                    </div>
+
+                    <!-- Biểu đồ 2 (MỚI): Đăng ký học lại T10 -->
+                    <div class="flex flex-col items-center p-4 bg-gray-50 rounded-lg border border-primary-light">
+                        <h3 class="text-xl font-semibold text-primary-green mb-3">Phân tích Đăng ký Học lại (Tháng 10)</h3>
+                        <div class="w-full max-w-xs">
+                            <canvas id="octoberRegistrationChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2 italic">Tổng 21 sinh viên đăng ký học lại trong tháng 10, K23 chiếm tỷ lệ cao nhất.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bảng chi tiết -->
+            <div class="mt-8 overflow-x-auto">
+                <table class="min-w-full divide-y divide-primary-green/50 rounded-lg overflow-hidden border border-primary-green/50">
+                    <thead class="bg-primary-green text-white">
+                        <tr>
+                            <th class="px-4 py-3 text-left text-sm font-semibold uppercase tracking-wider">Hệ</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold uppercase tracking-wider">Số SV học lại</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold uppercase tracking-wider">Số lượt học lại</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold uppercase tracking-wider">SV Đã học lại</th>
+                            <th class="px-4 py-3 text-left text-sm font-semibold uppercase tracking-wider">Tỷ lệ SV đã học lại</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-primary-light">
+                        <tr class="hover:bg-primary-light/50">
+                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-dark-text">K22+K22A</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600">249</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600">618</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-secondary-green font-bold">193</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-secondary-green font-bold">77.5%</td>
+                        </tr>
+                        <tr class="hover:bg-primary-light/50">
+                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-dark-text">K23+K23A</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600">422</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600">959</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-dark-text font-bold">85</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-dark-text font-bold">20.1%</td>
+                        </tr>
+                        <tr class="hover:bg-primary-light/50">
+                            <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-dark-text">K24+K24A</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600">529</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-600">1204</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-red-500 font-bold">6</td>
+                            <td class="px-4 py-3 whitespace-nowrap text-sm text-red-500 font-bold">1.1%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 5. Tỷ lệ Đi học (3 Biểu đồ) -->
+        <section class="mb-10 p-6 bg-primary-light rounded-lg card-shadow">
+            <h2 class="text-3xl font-bold text-dark-text mb-6 border-l-4 border-secondary-green pl-3">5. Phân tích Tỷ lệ Đi học tháng 10 (Chi tiết từng Lớp/Ngành)</h2>
+            
+            <div class="grid grid-cols-1 gap-8">
+                
+                <!-- Biểu đồ 1: Các lớp hệ Phổ thông Cao đẳng (18 lớp chi tiết) -->
+                <div class="bg-white p-4 rounded-lg chart-container-tall border-t-4 border-secondary-green">
+                    <h3 class="text-xl font-semibold text-primary-green mb-3 text-center">Tỷ Lệ Đi Học: Hệ Phổ Thông Cao Đẳng (18 Lớp)</h3>
+                    <canvas id="attendancePTCDChart"></canvas>
+                    <!-- GHI CHÚ MỚI ĐƯỢC BỔ SUNG -->
+                    <p class="text-xs text-center text-gray-500 mt-2">
+                        Các lớp dưới 75% (10A3, 10A6) cần được giám sát nề nếp chặt chẽ hơn.
+                        <br><strong>Ghi chú:</strong> lớp 10A3 đã tách và gộp vào các lớp bên cơ sở Dinhle.
+                    </p>
+                </div>
+                
+                <!-- Biểu đồ 2: Tỷ lệ đi học Tiếng Đức -->
+                <div class="bg-white p-4 rounded-lg chart-container-tall border-t-4 border-secondary-green">
+                    <h3 class="text-xl font-semibold text-primary-green mb-3 text-center">Tỷ Lệ Đi Học: Ngành Tiếng Đức (4 Lớp)</h3>
+                    <canvas id="attendanceDEChart"></canvas>
+                    <p class="text-xs text-center text-gray-500 mt-2">Lớp TĐA1-08 có tỷ lệ chuyên cần thấp (61%), cần theo dõi sát sao.</p>
+                </div>
+
+                <!-- Biểu đồ 3: Các lớp hệ Cao đẳng (11 Ngành chi tiết) -->
+                <div class="bg-white p-4 rounded-lg chart-container-tall border-t-4 border-secondary-green">
+                    <h3 class="text-xl font-semibold text-primary-green mb-3 text-center">Tỷ Lệ Đi Học: Lớp Ngành 11 (11 Ngành)</h3>
+                    <canvas id="attendanceCDChart"></canvas>
+                    <p class="text-xs text-center text-gray-500 mt-2">Công nghệ ô tô (68%) và Tiếng Nhật (69%) có tỷ lệ chuyên cần rất thấp, cần xử lý dứt điểm.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Biểu đồ Thống kê Quy mô HS Hệ PTCĐ -->
+        <section class="mb-10 p-6 bg-white rounded-lg card-shadow">
+            <h2 class="text-3xl font-bold text-dark-text mb-6 border-l-4 border-secondary-green pl-3">6. Biểu đồ Thống kê Quy mô Học sinh Hệ PTCĐ</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <!-- Tổng quan -->
+                <div class="p-6 bg-primary-light rounded-lg border-b-4 border-primary-green">
+                    <h3 class="text-2xl font-bold text-primary-green">Tổng quy mô Hệ 9+7: <span class="text-4xl">688</span> Học sinh</h3>
+                    <p class="text-gray-600 mt-2">Cơ cấu học sinh được phân bổ tương đối đồng đều giữa các khối lớp, giúp ổn định kế hoạch đào tạo.</p>
+                    <ul class="list-disc list-inside ml-4 mt-4 text-gray-700">
+                        <li>Khối 10: 192 học sinh</li>
+                        <li>Khối 11: 245 học sinh</li>
+                        <li>Khối 12: 251 học sinh</li>
+                    </ul>
+                </div>
+
+                <!-- Biểu đồ Thống kê số lượng SV -->
+                <div>
+                    <h3 class="text-xl font-semibold text-primary-green mb-3">Số lượng Học sinh phân bổ theo Khối</h3>
+                    <canvas id="ptcdStudentCountChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Thống kê Quy mô SV Hệ Cao Đẳng (MỚI BỔ SUNG) -->
+        <section class="mb-10 p-6 bg-primary-light rounded-lg card-shadow">
+            <h2 class="text-3xl font-bold text-dark-text mb-6 border-l-4 border-secondary-green pl-3">7. Thống kê Quy mô Sinh viên Hệ Cao Đẳng</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Tổng SV -->
+                <div class="md:col-span-3 p-6 bg-white rounded-lg border-b-4 border-primary-green text-center">
+                    <h3 class="text-2xl font-bold text-primary-green">Tổng quy mô Sinh viên Cao đẳng</h3>
+                    <p class="text-6xl font-extrabold text-primary-green mt-2">2,193</p>
+                    <p class="text-gray-600 mt-1">Sinh viên (Tính đến T10/2025)</p>
+                </div>
+                <!-- Các khóa -->
+                <div class="p-4 bg-white rounded-lg border-t-4 border-secondary-green/50 text-center">
+                    <p class="text-sm font-semibold text-dark-text">K25 (Mới)</p>
+                    <p class="text-3xl font-bold text-secondary-green">398 <span class="text-base font-medium">SV</span></p>
+                </div>
+                 <div class="p-4 bg-white rounded-lg border-t-4 border-secondary-green/50 text-center">
+                    <p class="text-sm font-semibold text-dark-text">K24</p>
+                    <p class="text-3xl font-bold text-secondary-green">854 <span class="text-base font-medium">SV</span></p>
+                </div>
+                 <div class="p-4 bg-white rounded-lg border-t-4 border-secondary-green/50 text-center">
+                    <p class="text-sm font-semibold text-dark-text">K23</p>
+                    <p class="text-3xl font-bold text-secondary-green">920 <span class="text-base font-medium">SV</span></p>
+                </div>
+                 <div class="p-4 bg-white rounded-lg border-t-4 border-yellow-500/50 text-center">
+                    <p class="text-sm font-semibold text-dark-text">K22</p>
+                    <p class="text-3xl font-bold text-yellow-600">20 <span class="text-base font-medium">SV</span></p>
+                </div>
+                 <div class="p-4 bg-white rounded-lg border-t-4 border-yellow-500/50 text-center">
+                    <p class="text-sm font-semibold text-dark-text">K21</p>
+                    <p class="text-3xl font-bold text-yellow-600">1 <span class="text-base font-medium">SV</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Báo cáo Cơ sở Vật chất (Đã đổi thành Mục 8) -->
+        <section class="mb-10 p-6 bg-primary-light rounded-lg card-shadow">
+            <h2 class="text-3xl font-bold text-dark-text mb-6 border-l-4 border-secondary-green pl-3">8. Báo cáo Cơ sở Vật chất & Công suất Phòng học</h2>
+            <!-- Nội dung tương tự như trước -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                
+                <!-- Cơ sở Dinhle -->
+                <div class="p-6 bg-red-100 rounded-lg border-t-4 border-high-usage">
+                    <h3 class="text-xl font-bold text-high-usage mb-3 flex items-center">
+                        Cơ sở Dinhle
+                        <span class="ml-2 px-2 py-0.5 text-xs font-semibold text-white bg-high-usage rounded-full">CAUTION</span>
+                    </h3>
+                    <div class="text-5xl font-extrabold text-high-usage">93%</div>
+                    <p class="text-sm text-gray-700 mt-2">Đạt <span class="font-bold text-high-usage">93%</span> công suất sử dụng phòng học trong tháng 10. Đây là mức công suất rất cao, cho thấy nhu cầu lớn tại cơ sở này.</p>
+                </div>
+                
+                <!-- Cơ sở Cầu Giấy -->
+                <div class="p-6 bg-white rounded-lg border-t-4 border-secondary-green">
+                    <h3 class="text-xl font-bold text-secondary-green mb-3">Cơ sở Cầu Giấy</h3>
+                    <div class="text-5xl font-extrabold text-secondary-green">43%</div>
+                    <p class="text-sm text-gray-700 mt-2">Đạt <span class="font-bold text-secondary-green">43%</span> công suất. Cơ sở còn nhiều không gian trống, thích hợp cho việc mở rộng quy mô hoặc tổ chức các lớp học mới.</p>
+                </div>
+            </div>
+
+            <!-- Nhận xét -->
+            <div class="mt-6 p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                <p class="font-bold text-yellow-700">Nhận xét và Đề xuất:</p>
+                <p class="text-sm text-gray-700 mt-1">Công suất cơ sở Dinhle đạt 93% gây khó khăn đáng kể trong việc **xếp lịch học bù** và **tổ chức sự kiện** lớn. Cần có kế hoạch sử dụng linh hoạt và xem xét chuyển một số lớp ghép/lớp học bù sang cơ sở Cầu Giấy để giảm tải cho Dinhle.</p>
+            </div>
+        </section>
+        
+        <!-- 9. Tình hình Giáo viên (Đã đổi thành Mục 9) -->
+        <section class="mb-10 p-6 bg-white rounded-lg card-shadow">
+            <h2 class="text-3xl font-bold text-dark-text mb-4 border-l-4 border-secondary-green pl-3">9. Tình hình Giáo viên: Vấn đề Nề nếp & Giám sát</h2>
+            
+            <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                <h3 class="font-bold text-xl text-red-600 mb-2">Vấn đề Nề nếp Cần Giải quyết Ngay</h3>
+                <ul class="list-disc list-inside ml-4 space-y-1 text-sm text-gray-700">
+                    <li>**Giáo viên Thỉnh giảng:** Cơ bản các GV thỉnh giảng còn **thả nổi nề nếp** (chưa giám sát chuyên cần chặt chẽ).</li>
+                    <li>**Vi phạm Quy định:** Một số GV còn vi phạm quy định (đến muộn, về sớm) gây ảnh hưởng đến tính kỷ luật chung.</li>
+                </ul>
+            </div>
+            
+            <div class="mt-6 p-4 bg-primary-light rounded-lg border-l-4 border-primary-green">
+                <h3 class="font-bold text-xl text-dark-text mb-2">Phương án Đề xuất Giám sát & Răn đe (Phòng ĐT chủ trì)</h3>
+                <ul class="list-disc list-inside ml-4 space-y-1 text-sm text-gray-700">
+                    <li>**Giám sát trực tiếp:** PĐT tổ chức đi giám sát hàng ngày, nhắc nhở trực tiếp GV và nhắc nhở Trưởng ngành để răn đe.</li>
+                    <li>**Kiểm soát Chuyên cần:** Đội ngũ trực ban thực hiện đúng quy định (ghi nhận đầy đủ).</li>
+                    <li>**Rà soát Kỹ thuật:** Checkcam hàng ngày để rà soát sai phạm một cách khách quan.</li>
+                    <li>**Quy trình Xử lý:** Quy định rõ các mức độ và hình thức xử lý vi phạm.</li>
+                    <li>**Báo cáo:** Thống kê vi phạm và gửi email nhắc nhở hàng tháng đến các GV vi phạm.</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="mt-10 pt-4 border-t border-primary-light text-center text-sm text-gray-500">
+            Báo cáo được tổng hợp và phân tích dữ liệu từ tài liệu gốc.
+        </footer>
+
+    </div>
+
+    <script type="text/javascript">
+        // =========================================================
+        // DỮ LIỆU TỶ LỆ ĐI HỌC (CẬP NHẬT THEO YÊU CẦU MỚI NHẤT)
+        // =========================================================
+
+        // 5.1. Hệ Phổ thông Cao đẳng (18 lớp chi tiết)
+        const ptcdAttendanceData = {
+            '10A3': 73, '10A4': 76, '10A5': 76, '10A6': 74, '10A7': 76,
+            '11A4': 80, '11A5': 76, '11A6': 82, '11A7': 81, '11A8': 83,
+            '11A9': 89, '12A3': 84, '12A4': 86, '12A5': 84, '12A6': 80,
+            '12A8': 85, '12A9': 83, '12A10': 86
+        };
+
+        // 5.2. Hệ Cao đẳng (11 ngành chi tiết)
+        const cdAttendanceData = {
+            'Phiên dịch tiếng anh': 79, 'Tiến Trung': 82, 'Digital Marketing': 75,
+            'Thiết kế đồ họa': 78, 'Ứng dụng phần mềm': 76, 'Công nghệ ôto': 68,
+            'Tiếng nhật': 69, 'Tiếng Hàn': 89, 'Quản trị khách sạn': 77,
+            'Quản trị doanh nghiệp': 78, 'Chăm sóc sắc đẹp': 80
+        };
+
+        // 5.3. Ngành Tiếng Đức (4 lớp chi tiết)
+        const deAttendanceData = {
+            'TĐA1-08': 61, 'TĐA2-09': 91, 'TĐB1-07': 88, 'TĐA1-10': 79
+        };
+        
+        // --- Dữ liệu báo cáo Học lại ---
+        const debtData = {
+            k22: { total: 249, paid: 193 },
+            k23: { total: 422, paid: 85 },
+            k24: { total: 529, paid: 6 },
+        };
+        
+        // 4.3. Dữ liệu Đăng ký học lại T10 (Tổng 21)
+        const octoberRegistrationData = {
+            labels: ['K23 (8 SV)', 'K24 (7 SV)', 'K22 (6 SV)'], // 8 + 7 + 6 = 21
+            data: [8, 7, 6],
+        };
+
+        // --- Dữ liệu thống kê quy mô HS PTCĐ ---
+        const ptcdStudentCountData = {
+            labels: ['Khối 10 (192 HS)', 'Khối 11 (245 HS)', 'Khối 12 (251 HS)'],
+            data: [192, 245, 251],
+        };
+
+
+        // =========================================================
+        // HÀM TẠO BIỂU ĐỒ CỘT (Có màu cảnh báo)
+        // =========================================================
+
+        // Hàm tạo màu sắc ngẫu nhiên nhưng đảm bảo độ tương phản (dùng HSL)
+        const getRandomColor = (index, total) => {
+            const hue = (index * (360 / total) + 120) % 360; // Bắt đầu từ màu xanh (120)
+            return `hsl(${hue}, 70%, 55%)`; 
+        };
+
+        // Hàm tạo biểu đồ cột chung (có cảnh báo < 75% màu đỏ)
+        const createBarChart = (canvasId, dataObject) => {
+            const labels = Object.keys(dataObject).map(key => `${key} (${dataObject[key]}%)`);
+            const values = Object.values(dataObject);
+
+            const ctx = document.getElementById(canvasId).getContext('2d');
+
+            // Tạo mảng màu nền dựa trên giá trị (dưới 75% màu đỏ)
+            const backgroundColors = values.map((val, index) => {
+                if (val < 75) return 'rgba(248, 113, 113, 0.9)'; // Màu đỏ (high-usage)
+                return getRandomColor(index, labels.length);
+            });
+            
+            const borderColors = values.map(val => val < 75 ? 'rgb(185, 28, 28)' : '#065F46');
+
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tỷ Lệ Đi Học (%)',
+                        data: values,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, 
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            max: 100, 
+                            title: { display: true, text: 'Tỷ lệ (%)' },
+                            ticks: { callback: (value) => value + '%' }
+                        },
+                        x: { 
+                            grid: { display: false },
+                            ticks: {
+                                // Tự động xoay nhãn nếu quá nhiều
+                                autoSkip: false,
+                                maxRotation: 60, 
+                                minRotation: 60,
+                                font: {
+                                    size: 10 // Giảm kích thước font cho nhãn x
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `Tỷ lệ: ${context.raw}%`
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+
+        // =========================================================
+        // HÀM TẠO BIỂU ĐỒ TIẾNG ĐỨC (MÀU ĐỒNG NHẤT KHÔNG CẢNH BÁO)
+        // =========================================================
+        
+        const createGermanBarChart = (canvasId, dataObject) => {
+            const labels = Object.keys(dataObject).map(key => `${key} (${dataObject[key]}%)`);
+            const values = Object.values(dataObject);
+
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            
+            // Màu xanh lá cây đồng nhất theo yêu cầu
+            const UNIFORM_GREEN = 'rgba(16, 185, 129, 0.9)'; // primary-green tone
+            const backgroundColors = Array(values.length).fill(UNIFORM_GREEN);
+            const borderColors = Array(values.length).fill('#065F46'); // dark-text
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tỷ Lệ Đi Học (%)',
+                        data: values,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, 
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            max: 100, 
+                            title: { display: true, text: 'Tỷ lệ (%)' },
+                            ticks: { callback: (value) => value + '%' }
+                        },
+                        x: { 
+                            grid: { display: false },
+                            ticks: {
+                                autoSkip: false,
+                                maxRotation: 60, 
+                                minRotation: 60,
+                                font: {
+                                    size: 10
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `Tỷ lệ: ${context.raw}%`
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+
+        // =========================================================
+        // KHỞI TẠO CÁC BIỂU ĐỒ KHÁC (PHẦN 4 & 6)
+        // =========================================================
+        
+        const initOtherCharts = () => {
+            // 4.1. Biểu đồ cột Tương quan (Tổng SV Nợ môn vs SV đã Học lại)
+            const debtCtx = document.getElementById('debtChart').getContext('2d');
+            new Chart(debtCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['K22+K22A', 'K23+K23A', 'K24+K24A'],
+                    datasets: [
+                        {
+                            label: 'Số SV Cần Học lại',
+                            data: [debtData.k22.total, debtData.k23.total, debtData.k24.total],
+                            backgroundColor: '#D1FAE5',
+                            borderColor: '#10B981',
+                            borderWidth: 1,
+                            stack: 'Stack 0',
+                        },
+                        {
+                            label: 'Số SV Đã Học lại (Hoàn thành)',
+                            data: [debtData.k22.paid, debtData.k23.paid, debtData.k24.paid],
+                            backgroundColor: '#10B981',
+                            borderColor: '#065F46',
+                            borderWidth: 1,
+                            stack: 'Stack 1',
+                        }
+                    ]
+                },
+                options: { responsive: true, scales: { x: { stacked: false, grid: { display: false } }, y: { stacked: false, beginAtZero: true } }, plugins: { legend: { position: 'top' } } }
+            });
+
+            // 4.2. Biểu đồ tròn K22+K22A (tỷ lệ SV đã học lại)
+            const k22APieCtx = document.getElementById('k22ApieChart').getContext('2d');
+            new Chart(k22APieCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Đã học lại (77.5%)', 'Chưa học lại (22.5%)'],
+                    datasets: [{
+                        data: [debtData.k22.paid, debtData.k22.total - debtData.k22.paid],
+                        backgroundColor: ['#10B981', '#D1FAE5'],
+                        hoverOffset: 4
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+            
+            // 4.3. (MỚI) Biểu đồ tròn Đăng ký học lại T10
+            const octoberRegCtx = document.getElementById('octoberRegistrationChart').getContext('2d');
+            new Chart(octoberRegCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: octoberRegistrationData.labels,
+                    datasets: [{
+                        data: octoberRegistrationData.data,
+                        backgroundColor: [
+                            '#34D399', // secondary-green
+                            '#F59E0B', // warning-yellow
+                            '#60A5FA'  // A blue color
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+            });
+
+            // 6. Biểu đồ Thống kê Quy mô HS Hệ PTCĐ
+            const ptcdStudentCountCtx = document.getElementById('ptcdStudentCountChart').getContext('2d');
+            new Chart(ptcdStudentCountCtx, {
+                type: 'bar',
+                data: {
+                    labels: ptcdStudentCountData.labels,
+                    datasets: [{
+                        label: 'Số lượng Học sinh',
+                        data: ptcdStudentCountData.data,
+                        backgroundColor: '#10B981',
+                        borderColor: '#065F46',
+                        borderWidth: 1,
+                    }]
+                },
+                options: { responsive: true, scales: { y: { beginAtZero: true }, x: { grid: { display: false } } }, plugins: { legend: { display: false } } }
+            });
+        };
+
+        // =========================================================
+        // KHỞI TẠO TẤT CẢ BIỂU ĐỒ
+        // =========================================================
+        
+        window.onload = function() {
+            try {
+                // Khởi tạo biểu đồ Tỷ lệ đi học (Phần 5)
+                createBarChart('attendancePTCDChart', ptcdAttendanceData);
+                createGermanBarChart('attendanceDEChart', deAttendanceData); // Sử dụng hàm riêng cho Tiếng Đức
+                createBarChart('attendanceCDChart', cdAttendanceData);
+
+                // Khởi tạo các biểu đồ khác
+                initOtherCharts();
+                
+            } catch (error) {
+                console.error("Lỗi khi tạo biểu đồ:", error);
+                const container = document.querySelector('.max-w-6xl');
+                const errorMessage = document.createElement('p');
+                errorMessage.className = 'text-red-500 text-center text-xl mt-10 p-5 bg-red-100 rounded-lg';
+                errorMessage.textContent = 'Lỗi hiển thị biểu đồ. Vui lòng kiểm tra console.';
+                container.appendChild(errorMessage);
+            }
+        };
+    </script>
+
+</body>
+</html>
